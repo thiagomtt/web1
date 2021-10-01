@@ -51,7 +51,7 @@
                     <td><a href="/<%= contextPath%>/clientes/edita?cpf=${cliente.cpf}"><fmt:message key="editar"/></a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/<%= contextPath%>/clientes/remove?cpf=${cliente.cpf}"
-                           onclick="return confirm(<fmt:message key="certeza_exclusao"/>);"><fmt:message
+                           onclick="return confirm('Tem certeza de que deseja excluir este cliente?');"><fmt:message
                                 key="remover"/></a>
                     </td>
                 </tr>

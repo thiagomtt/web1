@@ -90,7 +90,7 @@
                             </a>
                         </div>
                         <div class="carro-info">
-                            <h2 class="">
+                            <h2>
                                 <a href="/<%=contextPath%>/propostas/cadastro?chassi=${veiculo.chassi}"
                                    title="titulo carro"><span>${veiculo.modelo} </span>${veiculo.ano}</a>
                             </h2>
@@ -128,7 +128,7 @@
 
                             <c:if test="${sessionScope.clienteLogado.papel == \"ADMIN\"}">
                                 <a href="/<%=contextPath%>/veiculos/remove?chassi=${veiculo.chassi}"
-                                   class="btn" title="Remove">
+                                   class="btn" title="Remove" onclick="return confirm('Tem certeza de que deseja excluir este veiculo?');">
                                     <fmt:message key="deletar_veiculo"/>
                                 </a>
                             </c:if>
@@ -143,11 +143,14 @@
                     <c:if test="${veiculo.loja.cnpj == sessionScope.lojaLogado.cnpj}">
                         <div class="veiculosEstoque">
                             <div class="carro-img " style="padding: 5px;">
-                                <img src="${pageContext.request.contextPath}/fotos/${veiculo.chassi}_1.jpg"/>
+                                <a href="/<%=contextPath%>/veiculos/edita?chassi=${veiculo.chassi}">
+                                    <img src="${pageContext.request.contextPath}/fotos/${veiculo.chassi}_1.jpg"/>
+                                </a>
                             </div>
                             <div class="carro-info">
-                                <h2 class="">
-                                    <span>${veiculo.modelo} </span>${veiculo.ano}
+                                <h2>
+                                    <a href="/<%=contextPath%>/veiculos/edita?chassi=${veiculo.chassi}"
+                                       title="titulo carro"><span>${veiculo.modelo} </span>${veiculo.ano}</a>
                                 </h2>
                                 <ul class="list-inline resu-veiculo">
                                     <li class="text-center border-right">
@@ -180,7 +183,7 @@
                                 </a>
 
                                 <a href="/<%=contextPath%>/veiculos/remove?chassi=${veiculo.chassi}"
-                                   class="btn" title="Remove">
+                                   class="btn" title="Remove" onclick="return confirm('Tem certeza de que deseja excluir este veiculo?');">
                                     <fmt:message key="deletar_veiculo"/>
                                 </a>
                             </div>

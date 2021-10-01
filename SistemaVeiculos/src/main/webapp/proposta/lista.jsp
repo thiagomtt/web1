@@ -55,8 +55,9 @@
                                 <c:if test="${proposta.status != 1 and proposta.status != 0}">
                                     <td>
                                         <a href="/<%= contextPath%>/propostas/remove?cpf=${proposta.cliente.cpf}&chassi=${proposta.veiculo.chassi}"
-                                           onclick="return confirm(<fmt:message key="certeza_exclusao"/>);"><fmt:message
-                                                key="cancelar"/></a>
+                                           onclick="return confirm('Tem certeza de que deseja excluir esta proposta?');"><fmt:message
+                                                key="cancelar"/>
+                                        </a>
                                     </td>
                                 </c:if>
                             </tr>

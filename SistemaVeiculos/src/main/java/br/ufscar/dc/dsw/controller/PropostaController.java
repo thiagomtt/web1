@@ -139,7 +139,7 @@ public class PropostaController extends HttpServlet {
             dispatcher.forward(request, response);
         } catch (Exception e) {
             Erro erro = new Erro();
-            erro.add("Erro ao enviar proposta");
+            erro.add("É permitido somente uma proposta por carro");
             request.setAttribute("mensagens", erro);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/proposta/formulario.jsp");
             dispatcher.forward(request, response);

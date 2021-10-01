@@ -8,14 +8,14 @@
 <fmt:bundle basename="msg">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Autorização de Usuário</title>
+        <title>Autorização</title>
         <link href="${pageContext.request.contextPath}/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
     <%
         String contextPath = request.getContextPath().replace("/", "");
     %>
-    <h1>Autorização de Usuário</h1>
+    <h1>Autorização</h1>
     <c:if test="${mensagens.existeErros}">
         <div id="erro">
             <ul>

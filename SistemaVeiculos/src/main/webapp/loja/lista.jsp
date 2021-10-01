@@ -45,7 +45,7 @@
                     <td><a href="/<%=contextPath%>/lojas/edita?cnpj=${loja.cnpj}"><fmt:message key="editar"/></a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/<%=contextPath%>/lojas/remove?cnpj=${loja.cnpj}"
-                           onclick="return confirm(<fmt:message key="certeza_exclusao"/>);"><fmt:message
+                           onclick="return confirm('Tem certeza de que deseja excluir esta loja?');"><fmt:message
                                 key="remover"/></a>
                     </td>
                 </tr>
