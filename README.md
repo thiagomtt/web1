@@ -9,7 +9,7 @@
 
 -  Como SGBD utilizamos o MySQL e para visualizar as tabelas e dados do banco de dados utilizamos DBeaver e MySQL WorkBench
 -  O schema utilizado se chama: SistemaVeiculos 
--  Para popular inicialmente a aplicação é necessário rodar os scripts que se encontram na pasta src/db, nessa ordem:
+-  Para popular inicialmente a aplicação é necessário rodar os scripts que se encontram no diretório src/db/MySQL, nessa ordem:
     1.  create.sql
     2.  initClientes.sql
     3.  initLoja.sql
