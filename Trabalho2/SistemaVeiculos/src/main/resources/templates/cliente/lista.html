@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title th:text="#{gerenciar_clientes}"></title>
+</head>
+<body>
+<div style="text-align: center">
+    <h1>
+        <span th:text="#{gerenciar_clientes}"></span>
+    </h1>
+    <h2>
+        <a th:href="@{/}">
+            <span th:text="#{homepage}"></span>
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{/clientes/cadastro}">
+            <span th:text="#{adicionar_cliente}"></span>
+        </a>
+    </h2>
+</div>
+<div align="center">
+    <table border="1">
+        <tr>
+            <th>CPF</th>
+            <th>
+                <span th:text="#{nome}"></span>
+            </th>
+            <th>
+                <span th:text="#{email}"></span>
+            </th>
+            <th>
+                <span th:text="#{sexo}"></span>
+            </th>
+            <th>
+                <span th:text="#{telefone}"></span>
+            </th>
+            <th>
+                <span th:text="#{data_nascimento}"></span>
+            </th>
+        </tr>
+        <div th:each="cliente : ${listaClientes}">
+            <tr>
+                <td><span th:text="${cliente.cpf}"></span></td>
+                <td><span th:text="${cliente.nome}"></span></td>
+                <td><span th:text="${cliente.email}"></span></td>
+                <td><span th:text="${cliente.sexo}"></span></td>
+                <td><span th:text="${cliente.telefone}"></span></td>
+                <td><span th:text="${cliente.dataNascimento}"></span></td>
+                <td>
+                    <a th:href="@{/clientes/edita?cpf={cpf} (cpf=${cliente.cpf})}">
+                        <span th:text="#{editar}"></span>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{/clientes/remove?cpf={cpf} (cpf=${cliente.cpf})}"
+                       onclick="return confirm('Tem certeza de que deseja excluir este cliente?');">
+                        <span th:text="#{remover}"></span>
+                    </a>
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
+</body>
+</html>

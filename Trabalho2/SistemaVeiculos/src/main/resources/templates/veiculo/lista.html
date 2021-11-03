@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title th:text="#{homepage}"></title>
+</head>
+
+<body>
+<div class="top-bar">
+    <h1 class="title">NATHIJOR Veículos</h1>
+    <div class="nav-bar">
+
+        <div id="filter">
+            <a class="btn" th:href="@{/veiculos/lista}">Todos</a>
+            <span th:each="modelo : ${listaModelos}">
+                <a th:href="@{/veiculos/lista?modelo={modelo} (modelo=${modelo})}" class="btn" title="Filtro"><span
+                        th:text="${modelo}"></span></a>
+            </span>
+        </div>
+
+        <div class="login-cadastro">
+            <div sec:authorize="hasAuthority('LOJA')">
+                <a th:href="@{/propostas/lista}" style="margin-right: 10px;" th:text="#{lista_propostas}"></a>
+                <a th:href="@{/veiculos/cadastro}" style="margin-right: 10px;" th:text="#{cadastro_veiculo}"></a>
+            </div>
+
+            <div sec:authorize="hasAuthority('CLIENTE')">
+                <a th:href="@{/propostas/lista}" style="margin-right: 10px;" th:text="#{minhas_propostas}"></a>
+            </div>
+
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/lojas/lista}" style="margin-right: 10px;" th:text="#{gerenciar_lojas}"></a>
+                <a th:href="@{/clientes/lista}" style="margin-right: 10px;" th:text="#{gerenciar_clientes}"></a>
+            </div>
+
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}" th:text="#{login}"></a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" name="login-submit" id="login-submit"
+                           class="submitLink" value="Logout">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div sec:authorize="!isAuthenticated() || hasAnyAuthority('CLIENTE', 'ADMIN')">
+    <div class="grid-anuncios">
+        <div class="veiculosEstoque" th:each="veiculo : ${listaVeiculos}">
+            <div class="carro-img " style="padding: 5px;">
+                <a th:href="@{/propostas/cadastro?chassi={chassi} (chassi=${veiculo.chassi})}">
+                    <img th:src="@{/image/{chassi}_1.jpg (chassi=${veiculo.chassi})}"/>
+                </a>
+            </div>
+            <div class="carro-info">
+                <h2>
+                    <a th:href="@{/propostas/cadastro?chassi={chassi} (chassi=${veiculo.chassi})}">
+                        <span th:text="${veiculo.modelo}"></span>
+                        <span th:text="${veiculo.ano}"></span>
+                    </a>
+                </h2>
+                <ul class="list-inline resu-veiculo">
+                    <li class="text-center border-right">
+                        <span class="resumo" th:text="${veiculo.descricao}"></span>
+                    </li>
+                    <li class="text-center border-right">
+                            <span class="resumo" th:text="${veiculo.km}">
+                                KM
+                            </span>
+                    </li>
+                </ul>
+                <!-- anunciante -->
+                <div class="anunciante margin-top-10">
+                    <span th:text="${veiculo.loja.nome}"></span>
+                </div>
+            </div>
+            <div class="carro-preco">
+                <h3 class="preco">R$
+                    <span th:text="${veiculo.valor}"></span>
+                </h3>
+            </div>
+            <div class="gerenciar" style="display: flex; justify-content: space-between">
+                <div sec:authorize="hasAuthority('CLIENTE')">
+                    <a th:href="@{/propostas/cadastro?chassi={chassi} (chassi=${veiculo.chassi})}"
+                       class="btn" title="Proposta" th:text="#{proposta}"></a>
+                </div>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <a th:href="@{/veiculos/remove?chassi={chassi} (chassi=${veiculo.chassi})}"
+                       class="btn" title="Remove"
+                       onclick="return confirm('Tem certeza de que deseja excluir este veiculo?');"
+                       th:text="#{deletar_veiculo}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div sec:authorize="hasAuthority('LOJA')">
+    <div class="grid-anuncios">
+        <div class="veiculosEstoque" th:each="veiculo : ${listaVeiculos}"
+             th:if="${user.getId() == veiculo.loja.getId()}">
+            <div class="carro-img " style="padding: 5px;">
+                <a th:href="@{/veiculos/edita?chassi={chassi} (chassi=${veiculo.chassi})}">
+                    <img th:src="@{/image/{chassi}_1.jpg (chassi=${veiculo.chassi})}"/>
+                </a>
+            </div>
+            <div class="carro-info">
+                <h2>
+                    <a th:href="@{/veiculos/edita?chassi={chassi} (chassi=${veiculo.chassi})}">
+                        <span th:text="${veiculo.modelo}"></span>
+                        <span th:text="${veiculo.ano}"></span>
+                    </a>
+                </h2>
+                <ul class="list-inline resu-veiculo">
+                    <li class="text-center border-right">
+                        <span class="resumo" th:text="${veiculo.descricao}"></span>
+                    </li>
+                    <li class="text-center border-right">
+                            <span class="resumo" th:text="${veiculo.km}">
+                                KM
+                            </span>
+                    </li>
+                </ul>
+                <!-- anunciante -->
+                <div class="anunciante margin-top-10">
+                    <span th:text="${veiculo.loja.nome}"></span>
+                </div>
+            </div>
+            <div class="carro-preco">
+                <h3 class="preco">R$
+                    <span th:text="${veiculo.valor}"></span>
+                </h3>
+            </div>
+            <div class="gerenciar" style="display: flex; justify-content: space-between">
+                <a th:href="@{/veiculos/edita?chassi={chassi} (chassi=${veiculo.chassi})}"
+                   class="btn" title="Editar" th:text="#{editar_veiculo}"></a>
+                <a th:href="@{/veiculos/remove?chassi={chassi} (chassi=${veiculo.chassi})}"
+                   class="btn" title="Remove"
+                   onclick="return confirm('Tem certeza de que deseja excluir este veiculo?');"
+                   th:text="#{deletar_veiculo}"></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title th:text="#{gerenciar_lojas}"></title>
+</head>
+<body>
+<div style="text-align: center">
+    <h1>
+        <span th:text="#{gerenciar_lojas}"></span>
+    </h1>
+    <h2>
+        <a th:href="@{/}">
+            <span th:text="#{homepage}"></span>
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{/lojas/cadastro}">
+            <span th:text="#{adicionar_loja}"></span>
+        </a>
+    </h2>
+</div>
+<div align="center">
+    <table border="1">
+        <tr>
+            <th>CNPJ</th>
+            <th>
+                <span th:text="#{nome}"></span>
+            </th>
+            <th>
+                <span th:text="#{email}"></span>
+            </th>
+            <th>
+                <span th:text="#{descricao}"></span>
+            </th>
+        </tr>
+        <div th:each="loja : ${listaLojas}">
+            <tr>
+                <td><span th:text="${loja.cnpj}"></span></td>
+                <td><span th:text="${loja.nome}"></span></td>
+                <td><span th:text="${loja.email}"></span></td>
+                <td><span th:text="${loja.descricao}"></span></td>
+                <td>
+                    <a th:href="@{/lojas/edita?cnpj={cnpj} (cnpj=${loja.cnpj})}">
+                        <span th:text="#{editar}"></span>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{/lojas/remove?cnpj={cnpj} (cnpj=${loja.cnpj})}"
+                       onclick="return confirm('Tem certeza de que deseja excluir esta loja?');">
+                        <span th:text="#{remover}"></span>
+                    </a>
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
+</body>
+</html>

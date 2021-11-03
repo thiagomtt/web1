@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title th:text="#{lista_propostas}"></title>
+</head>
+<body>
+<div style="text-align: center">
+    <h2>
+        <a th:href="@{/}">
+            <span th:text="#{homepage}"></span>
+        </a>
+    </h2>
+</div>
+<div align="center">
+    <table border="1" sec:authorize="hasAuthority('CLIENTE')">
+        <tr>
+            <th>CPF</th>
+            <th><span th:text="#{modelo}"></span></th>
+            <th>Chassi</th>
+            <th><span th:text="#{loja}"></span></th>
+            <th><span th:text="#{valor}"></span></th>
+            <th><span th:text="#{condicao_pagamento}"></span></th>
+            <th><span th:text="#{data_envio}"></span></th>
+            <th><span th:text="#{status}"></span></th>
+        </tr>
+        <tr th:each="proposta : ${listaPropostas}" th:if="${cliente.cpf == proposta.cliente.cpf}">
+            <td><span th:text="${proposta.cliente.cpf}"></span></td>
+            <td><span th:text="${proposta.veiculo.modelo}"></span></td>
+            <td><span th:text="${proposta.veiculo.chassi}"></span></td>
+            <td><span th:text="${proposta.loja.nome}"></span></td>
+            <td><span th:text="${proposta.valor}"></span></td>
+            <td><span th:text="${proposta.pagamento}"></span></td>
+            <td><span th:text="${proposta.data}"></span></td>
+            <td>
+                <div th:switch="${proposta.status}">
+                    <span th:case="0" th:text="#{recusada}"></span>
+                    <span th:case="1" th:text="#{aceita}"></span>
+                    <span th:case="2" th:text="#{analise}"></span>
+                    <span th:case="3" th:text="#{contraproposta}"></span>
+                </div>
+            </td>
+            <td th:if="${proposta.status != 1 && proposta.status != 0}">
+                <a th:href="@{/propostas/remove?cpf={cpf}&chassi={chassi} (cpf=${proposta.cliente.cpf}, chassi=${proposta.veiculo.chassi})}"
+                   onclick="return confirm('Tem certeza de que deseja excluir esta proposta?');">
+                    <span th:text="#{cancelar}"></span>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <table border="1" sec:authorize="hasAuthority('LOJA')">
+        <tr>
+            <th>CPF</th>
+            <th><span th:text="#{cliente}"></span></th>
+            <th><span th:text="#{modelo}"></span></th>
+            <th>Chassi</th>
+            <th><span th:text="#{valor}"></span></th>
+            <th><span th:text="#{condicao_pagamento}"></span></th>
+            <th><span th:text="#{data_envio}"></span></th>
+            <th><span th:text="#{status}"></span></th>
+        </tr>
+        <tr th:each="proposta : ${listaPropostas}" th:if="${loja.cnpj == proposta.loja.cnpj}">
+            <td><span th:text="${proposta.cliente.cpf}"></span></td>
+            <td><span th:text="${proposta.cliente.nome}"></span></td>
+            <td><span th:text="${proposta.veiculo.modelo}"></span></td>
+            <td><span th:text="${proposta.veiculo.chassi}"></span></td>
+            <td><span th:text="${proposta.valor}"></span></td>
+            <td><span th:text="${proposta.pagamento}"></span></td>
+            <td><span th:text="${proposta.data}"></span></td>
+            <td>
+                <div th:switch="${proposta.status}">
+                    <span th:case="0" th:text="#{recusada}"></span>
+                    <span th:case="1" th:text="#{aceita}"></span>
+                    <span th:case="2" th:text="#{analise}"></span>
+                    <span th:case="3" th:text="#{contraproposta}"></span>
+                </div>
+            </td>
+            <td th:if="${proposta.status == 2}">
+                <a th:href="@{/propostas/edita?cpf={cpf}&chassi={chassi} (cpf=${proposta.cliente.cpf}, chassi=${proposta.veiculo.chassi})}">
+                    <span th:text="#{responder}"></span>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
