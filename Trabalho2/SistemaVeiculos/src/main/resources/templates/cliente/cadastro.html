@@ -38,7 +38,7 @@
                 <td><input type="text" id="email" name="email" size="45" required
                            th:value="${cliente != null} ? ${cliente.email}"/></td>
             </tr>
-            <tr>
+            <tr th:if="${cliente == null}">
                 <td><label for="senha">
                     <span th:text="#{senha}"></span>
                 </label></td>

@@ -23,14 +23,14 @@
                 <td><label for="modelo">
                     <span th:text="#{modelo}"></span>
                 </label></td>
-                <td><input type="text" id="modelo" name="modelo" size="45" required/></td>
+                <td><input type="text" id="modelo" name="modelo" size="45" th:value="${veiculo != null} ? ${veiculo.modelo}" required/></td>
             </tr>
             <tr>
                 <td><label for="ano">
                     <span th:text="#{ano}"></span>
                 </label></td>
                 <td><input type="number" id="ano" name="ano" size="5" required
-                           min="1900"/></td>
+                           min="1900" th:value="${veiculo != null} ? ${veiculo.ano}"/></td>
             </tr>
             <tr>
                 <td><label for="loja">
@@ -40,31 +40,33 @@
             </tr>
             <tr>
                 <td><label for="chassi">Chassi</label></td>
-                <td><input type="text" id="chassi" name="chassi" size="45" required/>
+                <td><input type="text" id="chassi" name="chassi" size="45"
+                           th:value="${veiculo != null} ? ${veiculo.chassi}" required/>
                 </td>
             </tr>
             <tr>
                 <td><label for="placa">Placa</label></td>
                 <td><input type="text" id="placa" name="placa" size="45"
-                           required/></td>
+                           th:value="${veiculo != null} ? ${veiculo.placa}" required/></td>
             </tr>
             <tr>
                 <td><label for="km">Km</label></td>
                 <td><input type="number" id="km" name="km"  required
-                           min="0" step="any"/></td>
+                           min="0" step="any" th:value="${veiculo != null} ? ${veiculo.km}"/></td>
             </tr>
             <tr>
                 <td><label for="descricao"><span th:text="#{descricao}"></span></label></td>
-                <td><input type="text" id="descricao" name="descricao" size="45" required/></td>
+                <td><input type="text" id="descricao" name="descricao" size="45"
+                           th:value="${veiculo != null} ? ${veiculo.descricao}" required/></td>
             </tr>
             <tr>
                 <td><label for="valor"><span th:text="#{valor}"></span></label></td>
                 <td><input type="number" id="valor" name="valor" required
-                           min="0.01" step="any"/></td>
+                           min="0.01" step="any" th:value="${veiculo != null} ? ${veiculo.valor}"/></td>
             </tr>
             <tr th:if="${veiculo == null}">
-                <td><label for="fotos"><span th:text="#{imagens}"></span></label></td>
-                <td><input type="file" id="fotos" value="fotos" name="fotos" multiple onchange="checkNumFiles();"/></td>
+                <td><label for="fotosUp"><span th:text="#{imagens}"></span></label></td>
+                <td><input type="file" id="fotosUp" value="fotosUp" name="fotosUp" multiple onchange="checkNumFiles();"/></td>
             </tr>
             <tr id="enviar">
                 <td colspan="2" style="text-align: center"><input type="submit" /></td>

@@ -4,6 +4,7 @@ import br.ufscar.dc.dsw.dao.*;
 import br.ufscar.dc.dsw.domain.*;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.EmailService;
+import br.ufscar.dc.dsw.util.Erro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -85,8 +86,14 @@ public class PropostaController {
                          RedirectAttributes attr) {
         proposta.setData(LocalDate.now());
         proposta.setStatus(2);
-        propostaDAO.save(proposta);
-        attr.addFlashAttribute("sucess", "Proposta Enviada");
+        try {
+            propostaDAO.save(proposta);
+            attr.addFlashAttribute("sucess", "Proposta Enviada");
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro no cadastro de cliente");
+            attr.addFlashAttribute("mensagens", erro);
+        }
         return "redirect:/propostas/lista";
     }
 
@@ -129,18 +136,27 @@ public class PropostaController {
                     break;
             }
             propostaDAO.save(propostaAtt);
-            return "redirect:/propostas/lista";
         } catch (Exception e) {
-            return e.toString();
+            Erro erro = new Erro();
+            erro.add("Erro na atualizacao de proposta");
+            attr.addFlashAttribute("mensagens", erro);
         }
+        return "redirect:/propostas/lista";
     }
 
     @GetMapping("/remove")
     public String remove(@RequestParam String cpf,
-                         @RequestParam String chassi) {
+                         @RequestParam String chassi,
+                         RedirectAttributes attr) {
         Cliente cliente = clienteDAO.getByCpf(cpf);
         Veiculo veiculo = veiculoDAO.getByChassi(chassi);
-        propostaDAO.deletePropostaByClienteAndVeiculo(cliente, veiculo);
+        try {
+            propostaDAO.deletePropostaByClienteAndVeiculo(cliente, veiculo);
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro na exclusao de propostas");
+            attr.addFlashAttribute("mensagens", erro);
+        }
         return "redirect:/propostas/lista";
     }
 

@@ -1,15 +1,13 @@
 package br.ufscar.dc.dsw.domain;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
 @Table(name = "Foto")
@@ -21,4 +19,5 @@ public class Foto extends AbstractEntity<Long> {
 
     @Column(nullable = false, unique = true)
     private String pathFoto;
+
 }

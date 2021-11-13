@@ -15,7 +15,7 @@ public class EmailService {
         try {
             Properties prop = new Properties();
 
-            final String username = "nathijorveiculos@gmail.com";
+            final String username = "veiculos.nathijor@gmail.com";
             final String password = "nathijor05";
             final String host = "smtp.gmail.com";
 

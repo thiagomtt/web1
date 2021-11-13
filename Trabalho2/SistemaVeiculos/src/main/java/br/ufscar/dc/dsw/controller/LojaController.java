@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.LojaDAO;
 import br.ufscar.dc.dsw.domain.Loja;
+import br.ufscar.dc.dsw.util.Erro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -49,8 +50,14 @@ public class LojaController {
             loja.setPapel("LOJA");
         }
         loja.setSenha(encoder.encode(loja.getSenha()));
-        lojaDAO.save(loja);
-        attr.addFlashAttribute("sucess", "Loja Cadastrada");
+        try {
+            lojaDAO.save(loja);
+            attr.addFlashAttribute("sucess", "Loja Cadastrada");
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro no cadastro de loja");
+            attr.addFlashAttribute("mensagens", erro);
+        }
         return "redirect:/lojas/lista";
     }
 
@@ -64,14 +71,27 @@ public class LojaController {
         if (loja.getId() == null) {
             loja.setId(lojaDAO.getByCnpj(loja.getCnpj()).getId());
         }
-        lojaDAO.save(loja);
-        attr.addFlashAttribute("sucess", "Loja Atualizada");
+        try {
+            lojaDAO.save(loja);
+            attr.addFlashAttribute("sucess", "Loja Atualizada");
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro na atualizacao de loja");
+            attr.addFlashAttribute("mensagens", erro);
+        }
         return "redirect:/lojas/lista";
     }
 
     @GetMapping("/remove")
-    public String remove(@RequestParam String cnpj) {
-        lojaDAO.deleteById(lojaDAO.getByCnpj(cnpj).getId());
+    public String remove(@RequestParam String cnpj,
+                         RedirectAttributes attr) {
+        try {
+            lojaDAO.deleteById(lojaDAO.getByCnpj(cnpj).getId());
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro na eclusao de loja");
+            attr.addFlashAttribute("mensagens", erro);
+        }
         return "redirect:/lojas/lista";
     }
 

@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.util.Erro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -51,9 +52,16 @@ public class ClienteController {
             cliente.setPapel("CLIENTE");
         }
         cliente.setSenha(encoder.encode(cliente.getSenha()));
-        clienteDAO.save(cliente);
-        attr.addFlashAttribute("sucess", "Cliente Cadastrado");
-        return "redirect:/clientes/lista";
+        try {
+            clienteDAO.save(cliente);
+            attr.addFlashAttribute("sucess", "Cliente Cadastrado");
+            return "redirect:/clientes/lista";
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro no cadastro de cliente");
+            attr.addFlashAttribute("mensagens", erro);
+            return "redirect:/clientes/lista";
+        }
     }
 
     @PostMapping("/atualiza")
@@ -66,16 +74,31 @@ public class ClienteController {
         if (cliente.getId() == null) {
             cliente.setId(clienteDAO.getByCpf(cliente.getCpf()).getId());
         }
-        clienteDAO.save(cliente);
-        attr.addFlashAttribute("sucess", "Cliente Cadastrado");
-        return "redirect:/clientes/lista";
+        try {
+            clienteDAO.save(cliente);
+            attr.addFlashAttribute("sucess", "Cliente Cadastrado");
+            return "redirect:/clientes/lista";
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro na atualizacao de cliente");
+            attr.addFlashAttribute("mensagens", erro);
+            return "redirect:/clientes/lista";
+        }
     }
 
     @GetMapping("/remove")
-    public String remove(@RequestParam String cpf) {
+    public String remove(@RequestParam String cpf,
+                         RedirectAttributes attr) {
         Cliente cliente = clienteDAO.getByCpf(cpf);
-        clienteDAO.deleteById(cliente.getId());
-        return "redirect:/clientes/lista";
+        try {
+            clienteDAO.deleteById(cliente.getId());
+            return "redirect:/clientes/lista";
+        } catch (Exception e) {
+            Erro erro = new Erro();
+            erro.add("Erro ao remover cliente");
+            attr.addFlashAttribute("mensagens", erro);
+            return "redirect:/clientes/lista";
+        }
     }
 
 }
