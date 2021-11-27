@@ -1,0 +1,32 @@
+[
+    {
+        "email": "thiago@gmail.com",
+        "nome": "Thiago M Teixeira",
+        "senha": "thiago",
+        "papel": "CLIENTE",
+        "cpf": "44175184830",
+        "sexo": "M",
+        "telefone": "014981216643",
+        "dataNascimento": "2000-05-05"
+    },
+    {
+        "email": "jorge@gmail.com",
+        "nome": "Jorge Vinicius Gonçalves",
+        "senha": "jorge",
+        "papel": "CLIENTE",
+        "cpf": "44175184840",
+        "sexo": "M",
+        "telefone": "019991365687",
+        "dataNascimento": "2000-04-05"
+    },
+    {
+        "email": "nath@gmail.com",
+        "nome": "Nathaelly Boni",
+        "senha": "nath",
+        "papel": "CLIENTE",
+        "cpf": "44175184850",
+        "sexo": "M",
+        "telefone": "016991260700",
+        "dataNascimento": "2000-09-28"
+    }
+]
