@@ -7,38 +7,28 @@
 
 ## Roteiro de execução
 
--  Como SGBD utilizamos o MySQL e para visualizar as tabelas e dados do banco de dados utilizamos DBeaver e MySQL WorkBench
--  O schema utilizado se chama: SistemaVeiculos_v2
--  Para popular inicialmente a aplicação é necessário rodar os scripts que se encontram no diretório src/db/MySQL, nessa ordem:
-    1.  create.sql
-    2.  Rodar a aplicação spring
-    3.  initVeiculo.sql
-    4.  initFoto.sql
-
-    Com isso vão ser gerados os seguintes perfis:
-
-    |Email|Senha|Papel|
-    |---|---|---|
-    |admin|admin|Admin|
-    |tmoraes505@gmail.com|thg|Cliente|
-    |loja1|loja1|Loja|
-    |loja2|loja2|Loja|
-
-    Ao rodar a aplicação alguma outra vez, comentar o método 'demo' do arquivo 'SistemaVeiculosApplication.java'
+-  Testar os tipos de requisições (POST, GET, PUT, DELETE) nos endpoints apontados, exemplos de objetos cliente/loja estão nos arquivos 'clientes.json' e 'lojas.json'.
+- Endpoint clientes: http://localhost:8080/clientes
+- Endpoint lojas: http://localhost:8080/lojas
 
 ## Checklist 
 
 | Requisitos | Status |
 | ------------- | ------------- |
-| R1: CRUD de Clientes | Implementado |
-| R2: CRUD de Lojas | Implementado |
-| R3: Cadastro de veículo para venda | Implementado |
-| R4: Listagem de todos os veículos em uma única página com filtro por modelo | Implementado |
-| R5: Proposta de compra de veículo | Implementado |
-| R6: Listagem de todos os veículos de uma loja | Implementado |
-| R7: Listagem de todas as propostas de compra de um cliente| Implementado |
-| R8: Análise/Resposta da loja para propostas em seus veículos | Implementado |
-| R9: Internacionalização em dois idiomas | Implementado |
-| R10: Sistema validar campos nos formulários | Parcialmente implementado |
+| R1: Create de Clientes | Implementado |
+| R2: Read (lista) de Clientes | Implementado |
+| R3: Read (id) de Clientes | Implementado |
+| R4: Update de Clientes | Implementado |
+| R5: Delete de Clientes | Implementado |
+| R6: Create de Lojas | Implementado |
+| R7: Read (lista) de Lojas | Implementado |
+| R8: Read (id) de Lojas | Implementado |
+| R9: Update de Lojas | Implementado |
+| R10: Delete de Lojas | Implementado |
+| R11: Create de Veiculos | Não implementado |
+| R12: Read (lista) de Veiculos | Não implementado |
+| R13: Read (id) de Veiculos | Não implementado |
+| R14: Update de Veiculos | Não implementado |
+| R15: Delete de Veiculos | Não implementado |
 
 Todas as etapas foram desenvolvidas em conjunto por todos os membros do grupo através de chamadas com compartilhamento de tela. 
