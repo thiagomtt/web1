@@ -1,10 +1,5 @@
 # Disciplina de Desenvolvimento Web 1 - 2021/1
 
-## Grupo
-    - Jorge Vinicius Gonçalves  - 758594
-    - Nathaelly Boni            - 758963
-    - Thiago de Moraes Teixeira - 760667
-
 ## Roteiro de execução
 
 -  Como SGBD utilizamos o MySQL e para visualizar as tabelas e dados do banco de dados utilizamos DBeaver e MySQL WorkBench
