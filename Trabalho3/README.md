@@ -1,10 +1,5 @@
 # Disciplina de Desenvolvimento Web 1 - 2021/1
 
-## Grupo
-    - Jorge Vinicius Gonçalves  - 758594
-    - Nathaelly Boni            - 758963
-    - Thiago de Moraes Teixeira - 760667
-
 ## Roteiro de execução
 
 -  Testar os tipos de requisições (POST, GET, PUT, DELETE) nos endpoints apontados, exemplos de objetos cliente/loja estão nos arquivos 'clientes.json' e 'lojas.json'.
